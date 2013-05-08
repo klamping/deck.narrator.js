@@ -1,0 +1,21 @@
+.deck-container .deck-audio-container {
+  position: absolute;
+  background: #222;
+  color: #EEE;
+  border-radius: 5px;
+}
+.deck-container .deck-audio-captions {
+  width: 90%;
+  bottom: 1%;
+  left: 0;
+  margin: 0 5%;
+}
+.deck-container .deck-audio-captions .deck-audio-caption {
+  margin: 0;
+}
+
+@media print {
+  .deck-audio-control {
+    display: none;
+  }
+}
