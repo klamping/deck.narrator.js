@@ -10,7 +10,7 @@ https://github.com/imakewebthings/deck.js/blob/master/GPL-license.txt
 This module adds a audio narration to slides
 */
 (function($, deck, undefined) {
-	var $d = $(document),
+	var $d = $(document);
 	
 	
 })(jQuery, 'deck');
