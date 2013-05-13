@@ -1,32 +1,8 @@
-.deck-container .deck-audio-container {
-  position: absolute;
-  background: #222;
-  color: #EEE;
-  border-radius: 5px;
-  opacity: 0.90;
-}
-.deck-container .deck-audio-controller {
+audio.deck-narrator-audio {
   position: absolute;
   top: 1%;
   left: 50%;
   width: 500px;
   margin-left: -250px;
   z-index: 10;
-
-}
-.deck-container .deck-audio-captions {
-  width: 90%;
-  bottom: 1%;
-  left: 0;
-  margin: 0 4%;
-  padding: 5px 1%;
-}
-.deck-container .deck-audio-captions .deck-audio-caption {
-  margin: 0;
-}
-
-@media print {
-  .deck-audio-control {
-    display: none;
-  }
 }

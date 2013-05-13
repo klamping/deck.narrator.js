@@ -34,15 +34,15 @@
 
 <!-- Begin slides. Just make elements with a class of slide. -->
 
-<section class="slide">
+<section class="slide" data-narrator-duration="2">
 	<h1>Slide</h1>
 </section>
 
-<section class="slide">
+<section class="slide" data-narrator-duration="5">
 	<h1>Content</h1>
 </section>
 
-<section class="slide">
+<section class="slide" data-narrator-duration="10">
 	<h1>Here</h1>
 </section>
 
@@ -74,20 +74,11 @@
 <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
 
 <!-- deck.narrator snippet -->
-<audio controls class="deck-audio-controller">
+<audio controls class="deck-narrator-audio" id="narrator-audio">
   <!-- <source src="Epoq-Lepidoptera.ogg.mp3" type="audio/mpeg" /> -->
   <source src="Epoq-Lepidoptera.ogg" type="audio/ogg"  />
+  <track kind="caption" src="captions.vtt" srclang="en" label="English" />
 </audio>
-
-<div class="deck-audio-container">
-    <button class="deck-audio-control deck-audio-captions"></button>
-</div>
-
-<div class="deck-audio-container deck-audio-captions" aria-live="polite">
-    <p class="deck-audio-caption">Captions go here</p>
-</div>
-
-
 <!-- End extension snippets. -->
 
 
