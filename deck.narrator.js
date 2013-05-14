@@ -14,7 +14,6 @@ This module adds a audio narration to slides
 (function($, deck, undefined) {
 	var $d = $(document);
 
-
   /*
   Extends defaults/options.
 
@@ -77,7 +76,6 @@ This module adds a audio narration to slides
         audio.currentTime = segments[currentIndex][0];
     });
     segmentEnd = segments[currentIndex][1];
-    // audio.play();
   })
   /* Update audio location, play till end of slide */
   .bind('deck.change', changeSlides);
