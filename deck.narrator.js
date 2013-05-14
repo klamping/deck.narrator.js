@@ -27,41 +27,60 @@ This module adds a audio narration to slides
     }
   });
 
-  var $audio,
+  var audio,
+      segments = [],
       segmentEnd = 0;
 
-  function checkRan () {
-      if (typeof segmentEnd !== 0 && $audio.currentTime >= segmentEnd) {
-          $audio.pause();
+  function checkTime () {
+      if (audio.currentTime >= segmentEnd) {
+          audio.pause();
       }
   }
+
+  function changeSlides (e, from, to) {
+    if(audio) {
+      audio.pause();
+
+      audio.currentTime = segments[to][0];
+      segmentEnd = segments[to][1];
+
+      audio.play();
+    }
+  }
+
   $d.bind('deck.init', function() {
     var opts = $[deck]('getOptions');
-    $audio = $(opts.selectors.narratorAudio)[0];
+    audio = $(opts.selectors.narratorAudio).get(0);
 
-    $audio.addEventListener('timeupdate', checkRan, false);
+    audio.addEventListener('timeupdate', checkTime, false);
 
-    // initialize first segement end and play
-    segmentEnd = $[deck]('getSlide', 0).data('narrator-duration');
+    // build audio stops
+    var slides = $[deck]('getSlides');
+    $currentSlide = $[deck]('getSlide');
+    var position = 0;
+    var currentIndex = 0;
 
-    $audio.play();
+    $.each(slides, function(i, $el) {
+      var duration = $el.data('narrator-duration');
+
+      if ($currentSlide == $el) {
+        currentIndex = i;
+      }
+
+      segments.push([position, position + duration]);
+      position += duration;
+    });
+
+
+    // initialize first segment end and play
+    audio.addEventListener('canplay', function(){
+        audio.currentTime = segments[currentIndex][0];
+    });
+    segmentEnd = segments[currentIndex][1];
+    // audio.play();
   })
   /* Update audio location, play till end of slide */
-  .bind('deck.change', function(e, from, to) {
-    var fromDuration = $[deck]('getSlide', from).data('narrator-duration');
-    var toDuration = $[deck]('getSlide', to).data('narrator-duration');
-    if($audio) {
-      $audio.pause();
-      if (from > to) { // were moving backwards
-        $audio.currentTime = segmentEnd - (toDuration + fromDuration);
-        segmentEnd = toDuration;
-      } else { // were moving forwards
-        $audio.currentTime = segmentEnd; // move current time ahead
-        segmentEnd = toDuration + $audio.currentTime;
-      }
-      $audio.play();
-    }
-  });
+  .bind('deck.change', changeSlides);
 
 })(jQuery, 'deck');
 
