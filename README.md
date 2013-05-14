@@ -15,3 +15,13 @@ There are two steps to adding audio narration to your slides:
       <source src="myAudio.ogg" type="audio/ogg"  />
       <track kind="caption" src="captions.vtt" srclang="en" label="English" />
     </audio>
+
+
+I've got this small piece of HTML
+
+    <blockquote>
+        <p>
+        </p>
+        <footer>
+        </footer>
+    </blockquote>
