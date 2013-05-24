@@ -31,7 +31,7 @@ The example above is missing our audio files, so nothing will be played. Let's u
 
 	<audio controls>
 		<source src="myAudio.mp3" type="audio/mpeg" />
-     <source src="myAudio.ogg" type="audio/ogg"  />
+		<source src="myAudio.ogg" type="audio/ogg"  />
 		Your browser does not support HTML5 audio.
 	</audio>
 
@@ -111,67 +111,67 @@ To store our audio duration, we'll take advantage of the data- attribute by crea
 
 Then, upon page initialization, we'll loop through each slide element and calculate the proper start/stop timestamps for each slide. This is important in case our viewer wants to move through the slides in a non-linear fashion. Here's the basic code:
 
-(function () {
-  // create an array for our segment timestamps 
-  var segments = [];
-  
-  // create a placeholder for our audio element reference 
-  var audio; 
-  
-  // we'll get to this variable later
-  var segmentEnd = 0;
-
-  function init () {
-    // get the audio element we added to our page
-    audio = document.getElementById('audioNarration');
-    
-    // use deck.js built-in functionality to get all slides and current slide
-    var slides = $[deck]('getSlides'); 
-    var $currentSlide = $[deck]('getSlide');
-    
-    // set initial values for time position and index
-    var position = 0;
-    var currentIndex = 0;
+    (function () {
+      // create an array for our segment timestamps 
+      var segments = [];
       
-    // now loop through each slide
-    $.each(slides, function(i, $el) {
-      // get the duration specified from the HTML element
-      var duration = $el.data('narrator-duration');
+      // create a placeholder for our audio element reference 
+      var audio; 
+      
+      // we'll get to this variable later
+      var segmentEnd = 0;
 
-      // this determines which slide the viewer loaded the page on
-      if ($currentSlide == $el) {
-        currentIndex = i;
+      function init () {
+        // get the audio element we added to our page
+        audio = document.getElementById('audioNarration');
+        
+        // use deck.js built-in functionality to get all slides and current slide
+        var slides = $[deck]('getSlides'); 
+        var $currentSlide = $[deck]('getSlide');
+        
+        // set initial values for time position and index
+        var position = 0;
+        var currentIndex = 0;
+          
+        // now loop through each slide
+        $.each(slides, function(i, $el) {
+          // get the duration specified from the HTML element
+          var duration = $el.data('narrator-duration');
+
+          // this determines which slide the viewer loaded the page on
+          if ($currentSlide == $el) {
+            currentIndex = i;
+          }
+
+          // push the start time (previous position) and end time (position + duration) to an array of slides
+          segments.push([position, position + duration]);
+
+          // increment the position to the start of the next slide
+          position += duration;
+        });
       }
-
-      // push the start time (previous position) and end time (position + duration) to an array of slides
-      segments.push([position, position + duration]);
-
-      // increment the position to the start of the next slide
-      position += duration;
-    });
-  }
-}());
+    }());
 
 ## Adding playback automatically on slide change
 
 Now that we've got our segment timestamps defined, let's look at playing that audio on each slide transition. Deck.js fires a 'deck.change' event when the slide is changed, so we hook into that and have it call our changeSlides function, which looks like:
 
-  function changeSlides (e, from, to) {
-  	  // check to make sure audio element has been found
-    if(audio) {
-      // stop any audio that's playing from the previous slide
-      audio.pause();
+    function changeSlides (e, from, to) {
+      // check to make sure audio element has been found
+      if(audio) {
+        // stop any audio that's playing from the previous slide
+        audio.pause();
 
-      // move the playback to our slides start
-      audio.currentTime = segments[to][0];
-      
-      // define the end of our section
-      segmentEnd = segments[to][1];
+        // move the playback to our slides start
+        audio.currentTime = segments[to][0];
+        
+        // define the end of our section
+        segmentEnd = segments[to][1];
 
-      // play the audio
-      audio.play();
+        // play the audio
+        audio.play();
+      }
     }
-  }
   
 Most of the code makes sense, but I do want to specifically call out the 'segmentEnd' line. 
 
@@ -179,15 +179,15 @@ Most of the code makes sense, but I do want to specifically call out the 'segmen
 
 Unfortunately, it's not the easiest to define a duration that audio should play for. Once you start playing, it will keep going until it runs out of audio or you tell it to pause. Thankfully, the audio element emits a 'timeupdate' event which we can listen to in order to pause playback once our segment timestampt has been reached. We can add that listener just like any other event listener:
 
-  audio.addEventListener('timeupdate', checkTime, false);
+    audio.addEventListener('timeupdate', checkTime, false);
     
 Our 'checkTime' function is very small. All it does is check to see if currentTime in the audio is greater than the segmentEnd time. If so, it pauses our audio:
 
-  function checkTime () {
+    function checkTime () {
       if (audio.currentTime >= segmentEnd) {
-          audio.pause();
+        audio.pause();
       }
-  }
+    }
   
 ## Summing up
 
