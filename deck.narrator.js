@@ -6,6 +6,9 @@ https://github.com/imakewebthings/deck.js/blob/master/MIT-license.txt
 https://github.com/imakewebthings/deck.js/blob/master/GPL-license.txt
 
 // TODO hook up with https://github.com/cgiffard/Captionator/
+// TODO organize code a little bit better
+// TODO add in unit/functional tests
+
 */
 
 /*
@@ -55,7 +58,7 @@ This module adds a audio narration to slides
 
     // build audio stops
     var slides = $[deck]('getSlides');
-    $currentSlide = $[deck]('getSlide');
+    var $currentSlide = $[deck]('getSlide');
     var position = 0;
     var currentIndex = 0;
 
@@ -81,4 +84,11 @@ This module adds a audio narration to slides
   .bind('deck.change', changeSlides);
 
 })(jQuery, 'deck');
+
+
+
+
+
+
+
 
