@@ -51,14 +51,14 @@ This module adds a audio narration to slides
   }
 
   $d.bind('deck.init', function() {
-    var opts = $[deck]('getOptions');
+    var opts = $.deck('getOptions');
     audio = $(opts.selectors.narratorAudio).get(0);
 
     audio.addEventListener('timeupdate', checkTime, false);
 
     // build audio stops
-    var slides = $[deck]('getSlides');
-    var $currentSlide = $[deck]('getSlide');
+    var slides = $.deck('getSlides');
+    var $currentSlide = $.deck('getSlide');
     var position = 0;
     var currentIndex = 0;
 

@@ -14,7 +14,7 @@ There are two steps to adding audio narration to your slides (aside from recordi
  2. Add the `<audio>` tag to your page. Example:
 
         <audio controls class="deck-narrator-audio" id="narrator-audio">
-          <source src="myAudio.mp3" type="audio/mpeg" />
+          <source src="myAudio.acc" type="audio/acc" />
           <source src="myAudio.ogg" type="audio/ogg"  />
           <track kind="caption" src="captions.vtt" srclang="en" label="English" />
         </audio>
