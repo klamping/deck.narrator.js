@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="../lib/deck.js/core/deck.core.css">
 
 	<!-- Extension CSS files go here. Remove or add as needed. -->
-	<link rel="stylesheet" href="../lib/deck.js/extensions/goto/deck.goto.css">
 	<link rel="stylesheet" href="../lib/deck.js/extensions/menu/deck.menu.css">
 	<link rel="stylesheet" href="../lib/deck.js/extensions/navigation/deck.navigation.css">
 	<link rel="stylesheet" href="../lib/deck.js/extensions/status/deck.status.css">
@@ -33,16 +32,34 @@
 
 <!-- Begin slides. Just make elements with a class of slide. -->
 
-<section class="slide" data-narrator-duration="2">
+<section class="slide" data-narrator-duration="4.5">
 	<h1>Slide Narration with HTML5 Audio</h1>
 </section>
 
-<section class="slide" data-narrator-duration="5">
-	<h1>deck.narrator.js</h1>
+<section class="slide" data-narrator-duration="4.2">
+	<h2>Yay Slides!</h2>
+
+	<p>
+		<a href="https://twitter.com/unconed/status/340988601741479936">
+			<img src="tweet.png" alt="Example tweet with link to slides" />
+		</a>
+	</p>
 </section>
 
-<section class="slide" data-narrator-duration="3">
-	<h3>https://github.com/klamping/deck.narrator.js</h3>
+<section class="slide" data-narrator-duration="4">
+	<h2>WTF?</h2>
+	
+	<p>
+		<a href="http://www.slideshare.net/klamping/css-pres">
+			<img src="slide.png" alt="Example slide that makes no sense without audio or description" />
+		</a>
+	</p>
+</section>
+
+<section class="slide" data-narrator-duration="8">
+	<h2>Find Out How to:</h2>
+	<!-- TODO change to HTML5Hacks.com URL -->
+	<p><a href="http://github.com/klamping/deck.narrator.js">Add Narration to your Slide Deck with HTML5 Audio</a></p>
 </section>
 
 <!-- End slides. -->
@@ -61,22 +78,15 @@
 	<span class="deck-status-total"></span>
 </p>
 
-<!-- deck.goto snippet -->
-<form action="." method="get" class="goto-form">
-	<label for="goto-slide">Go to slide:</label>
-	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
-	<datalist id="goto-datalist"></datalist>
-	<input type="submit" value="Go">
-</form>
 
 <!-- deck.hash snippet -->
 <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
 
 <!-- deck.narrator snippet -->
 <audio controls class="deck-narrator-audio" id="narrator-audio">
-  <!-- <source src="Epoq-Lepidoptera.ogg.mp3" type="audio/mpeg" /> -->
-  <source src="Epoq-Lepidoptera.ogg" type="audio/ogg"  />
-  <track kind="caption" src="captions.vtt" srclang="en" label="English" />
+  <!-- <source src="audio.m4a" type="audio/mp4" /> -->
+  <source src="audio.ogg" type="audio/ogg" />
+  <track kind="caption" src="transcript.vtt" srclang="en" label="English" />
 </audio>
 <!-- End extension snippets. -->
 
@@ -89,7 +99,6 @@
 <script src="../lib/deck.js/core/deck.core.js"></script>
 <script src="../lib/deck.js/extensions/hash/deck.hash.js"></script>
 <script src="../lib/deck.js/extensions/menu/deck.menu.js"></script>
-<script src="../lib/deck.js/extensions/goto/deck.goto.js"></script>
 <script src="../lib/deck.js/extensions/status/deck.status.js"></script>
 <script src="../lib/deck.js/extensions/navigation/deck.navigation.js"></script>
 <script src="../lib/deck.js/extensions/scale/deck.scale.js"></script>

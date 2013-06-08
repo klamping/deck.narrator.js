@@ -43,7 +43,11 @@ This module adds a audio narration to slides
     if(audio) {
       audio.pause();
 
-      audio.currentTime = segments[to][0];
+      audio.oncanplaythrough = setTimeout(function(){
+        audio.currentTime = segments[to][0];
+        audio.oncanplaythrough = null;
+      }, 500);
+
       segmentEnd = segments[to][1];
 
       audio.play();

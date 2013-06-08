@@ -1,10 +1,13 @@
 WEBVTT
 
-00:00.000 --> 00:13.000
-<v Kevin Lamping>Slide Narration with HTML5 Audio
+00:00.000 --> 00:04.500
+<v Kevin Lamping>Add Narration to your Slide Deck with HTML5 Audio
 
-00:13.000 --> 00:16.000
-<v Kevin Lamping>We're actually at the Lucern Hotel, just down the street
+00:04.500 --> 00:08.000
+<v Kevin Lamping>A good presenter will share their slide deck on the web after their presentation.
 
-00:16.000 --> 00:18.000
-<v Kevin Lamping>from the American Museum of Natural History
+00:08.000 --> 00:12.000
+<v Kevin Lamping>But many times the slides are only a shell of the real talk.
+
+00:12.000 --> 00:20.000
+<v Kevin Lamping>Fortunately, with HTML5 audio, we can add our voice back to our slides and recreate the real presentation.

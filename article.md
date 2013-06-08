@@ -2,6 +2,11 @@
 
 **A good presenter will share their slide deck on the web after their presentation. But many times the slides are only a shell of the real talk. Fortunately, with HTML5 audio, we can add our voice back to our slides and recreate the real presentation.**
 
+## Sample Example
+
+// TODO update link to html5hacks site
+To show what we're trying to accomplish, I've created [a very basic slide deck with audio narration](...) which briefly describes the issue at hand. 
+
 ## Audio on the Web
 
 Back when the web was just taking off, it was common (bad) practice to include audio on your page. I'm not talking about a Flash-based music player, but rather the more primitive audio solution: `<bgsound>`. Those who were programming back when HTML 3.2 came out will be familiar with this oft-forgotten tag. 
@@ -13,9 +18,9 @@ So what benefits does `<audio>` bring us? Well, `<bgsound>` was an IE only prope
 ## File formats
 Before getting in to the details on how we're going to use the `<audio>` tag, we need to talk a little about file formats. The MP3 format has gained tremendous popularity over the last decade and a half, but unfortunately due to licensing requirements, relying on MP3's for our audio is a messy situation. 
 
-Luckily for us, the `<audio>` tag supports multiple formats gracefully. This means we can create a patchwork of audio file formats to gain full browser support. And we'll need a patch work because no format is supported across all browsers. 
+Luckily for us, the `<audio>` tag supports multiple formats gracefully. This means we can create a patchwork of audio file formats to gain full browser support. And we'll need a patch work because no one format is currently supported across all browsers. 
 
-For our needs, we've created two files: an AAC file and an OggVorbis file. 
+For our needs, we've created two files: an MP4/AAC file and an OggVorbis file. 
 
 If you'd like to read more on the subject, I highly recommend [Ashley Gullen's post 'On HTML5 audio formats - AAC and Ogg'](https://www.scirra.com/blog/44/on-html5-audio-formats-aac-and-ogg).
 
@@ -24,7 +29,7 @@ If you'd like to read more on the subject, I highly recommend [Ashley Gullen's p
 Now that we've got our files created, let's put them to use. We can load our audio files by adding in two `<source>` tags with information about our two audio files inside of the `<audio>` tag:
 
     <audio controls>
-      <source src="myAudio.acc" type="audio/acc" />
+      <source src="myAudio.m4a" type="audio/mp4" />
       <source src="myAudio.ogg" type="audio/ogg"  />
       Your browser does not support HTML5 audio.
     </audio>
@@ -183,12 +188,8 @@ Our 'checkTime' function is very small. All it does is check to see if currentTi
 
 ## Automatically Moving Through Slides
 
-Now that we've got our audio hooked up to our slides, we can take advantage of the other extensions already written for Deck.js. [https://github.com/rchampourlier/deck.automatic.js/‎](deck.automatic.js) is an extension that makes your slides run automatically. By including this extension with our presentation, we can recreate that 'presentation' feel to our slides. There's nothing to change in our code, since we already 
+Now that we've got our audio hooked up to our slides, we can take advantage of the other extensions already written for Deck.js. [https://github.com/rchampourlier/deck.automatic.js/‎](deck.automatic.js) is an extension that makes your slides run automatically. By including this extension with our presentation, we can recreate that 'presentation' feel to our slides. There's nothing to change in our code, since we already have the audio hooked up to our slide change event.
 
-## In Action
-
-
-  
 ## Summing Up
 
 That's the majority of the code. I left out a few details in relation to some deck.js configurations, so again check out [the GitHub repo for the full example](https://github.com/klamping/deck.narrator.js).
