@@ -124,8 +124,8 @@ Then, upon page initialization, we'll loop through each slide element and calcul
       audio = document.getElementById('audioNarration');
       
       // use deck.js built-in functionality to get all slides and current slide
-      var $slides = $[deck]('getSlides'); 
-      var $currentSlide = $[deck]('getSlide');
+      var $slides = $.deck('getSlides'); 
+      var $currentSlide = $.deck('getSlide');
       
       // set initial values for time position and index
       var position = 0;
@@ -210,9 +210,9 @@ And then add our event listeners in the deck.init callback:
 
     });
 
-Also, since our slides automatically advance, we need to comment out the 'timeupdate' event listener which pauses our audio at the end of a slide.
+Also, since our slides automatically advance, we need to comment out the 'timeupdate' event listener which would pause our audio at the end of a slide.
 
-And that's it. Now our slides and audio automatically transition. 
+With those things taken care of, our slides and audio automatically transition to create a seamless experience.
 
 ## Next Steps
 

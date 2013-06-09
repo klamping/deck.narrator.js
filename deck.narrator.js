@@ -57,15 +57,10 @@ This module adds a audio narration to slides
     $.deck('pause');
   }
 
-  function setInitialTime (ev) {
-        audio.currentTime = segments[currentIndex][0];
-
-        // remove event listener so this function doesn't get executed again
-        this.removeEventListener('canplay',setInitialTime,false);
-  }
-
   $d.bind('deck.init', function() {
     var opts = $.deck('getOptions');
+
+    // get the audio element we added to our page
     audio = $(opts.selectors.narratorAudio).get(0);
 
     // uncomment following line if not using deck.automatic.js
@@ -75,25 +70,46 @@ This module adds a audio narration to slides
     audio.addEventListener('play', startSlides, false);
     audio.addEventListener('pause', stopSlides, false);
 
-    // build audio stops
+    // use deck.js built-in functionality to get all slides and current slide
     var slides = $.deck('getSlides');
     var $currentSlide = $.deck('getSlide');
+
+    // set initial values for time position and index
     var position = 0;
     var currentIndex = 0;
 
     $.each(slides, function(i, $el) {
+      // get the duration specified from the HTML element 
       var duration = $el.data('narrator-duration');
 
+      // this determines which slide the viewer loaded the page on
       if ($currentSlide == $el) {
         currentIndex = i;
       }
 
+      // push the start time (previous position) and end time (position + duration) to an array of slides
       segments.push([position, position + duration]);
+
+      // increment the position to the start of the next slide
       position += duration;
     });
 
-    // initialize first segment start and end
-    audio.addEventListener('canplay', setInitialTime);
+    try {
+      // try setting the initial time
+      // this will throw an exception if the audio isn't ready
+      audio.currentTime = segments[currentIndex][0];
+    } catch (e) {
+      // if we catch, then the audio isn't ready yet
+      // wait for audio to be ready, then try again
+      audio.addEventListener('canplay', function (ev) {
+        audio.currentTime = segments[currentIndex][0];
+
+        // remove event listener so this function doesn't get executed again
+        this.removeEventListener('canplay', arguments.callee, false);
+      });
+    }
+
+    // set the first end point for our audio (if we're not using deck.automatic.js)
     segmentEnd = segments[currentIndex][1];
   })
   /* Update audio location, play till end of slide */
