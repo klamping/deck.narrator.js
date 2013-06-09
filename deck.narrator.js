@@ -41,8 +41,6 @@ This module adds a audio narration to slides
 
   function changeSlides (e, from, to) {
     if (audio) {
-      audio.pause();
-
       audio.currentTime = segments[to][0];
 
       segmentEnd = segments[to][1];
@@ -51,11 +49,22 @@ This module adds a audio narration to slides
     }
   }
 
+  function startSlides (ev) {
+    $.deck('play');
+  }
+
+  function stopSlides (ev) {
+    $.deck('pause');
+  }
+
   $d.bind('deck.init', function() {
     var opts = $.deck('getOptions');
     audio = $(opts.selectors.narratorAudio).get(0);
 
     audio.addEventListener('timeupdate', checkTime, false);
+
+    audio.addEventListener('play', startSlides, false);
+    audio.addEventListener('pause', stopSlides, false);
 
     // build audio stops
     var slides = $.deck('getSlides');

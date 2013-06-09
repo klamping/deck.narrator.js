@@ -156,9 +156,6 @@ Now that we've got our segment timestamps defined, let's look at playing that au
     function changeSlides (e, from, to) {
       // check to make sure audio element has been found
       if(audio) {
-        // stop any audio that's playing from the previous slide
-        audio.pause();
-
         // move the playback to our slides start
         audio.currentTime = segments[to][0];
         
@@ -188,7 +185,35 @@ Our 'checkTime' function is very small. All it does is check to see if currentTi
 
 ## Automatically Moving Through Slides
 
-Now that we've got our audio hooked up to our slides, we can take advantage of the other extensions already written for Deck.js. [https://github.com/rchampourlier/deck.automatic.js/‎](deck.automatic.js) is an extension that makes your slides run automatically. By including this extension with our presentation, we can recreate that 'presentation' feel to our slides. There's nothing to change in our code, since we already have the audio hooked up to our slide change event.
+Now that we've got our audio hooked up to our slides, we can take advantage of the other extensions already written for Deck.js. [https://github.com/rchampourlier/deck.automatic.js/‎](deck.automatic.js) is an extension that makes your slides run automatically. By including this extension with our presentation, we can recreate that 'presentation' feel to our slides. 
+
+Aside from the going through the steps of adding the automatic extension, we also need to make sure that if a user starts/stops the audio, we start/stop the slideshow playback. To do this, we'll sync up [the 'play' and 'pause' events of our audio element](https://developer.mozilla.org/en-US/docs/Web/Guide/DOM/Events/Media_events) with the automatic extension. For simplicity, we're going to control all slide playback using our audio controls and leave off the deck.automatic.js playback control.
+
+Deck.automatic.js adds some events to the mix, including 'play' and 'pause' events. By triggering these events when our similarly named audio event fire, we can make sure our slides are in sync with our content. 
+
+We add two simple functions to our extension:
+
+    function startSlides (ev) {
+      $.deck('play');
+    }
+
+    function stopSlides (ev) {
+      $.deck('pause');
+    }
+
+And then add our event listeners in the deck.init callback:
+
+    $d.bind('deck.init', function() {
+
+      // ... other code here ...
+
+      // Sync audio with slides
+      audio.addEventListener('play', startSlides, false);
+      audio.addEventListener('pause', stopSlides, false);
+
+    });
+
+And that's it. Now our slides and audio automatically transition. 
 
 ## Summing Up
 
