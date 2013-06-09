@@ -40,13 +40,10 @@ This module adds a audio narration to slides
   }
 
   function changeSlides (e, from, to) {
-    if(audio) {
+    if (audio) {
       audio.pause();
 
-      audio.oncanplaythrough = setTimeout(function(){
-        audio.currentTime = segments[to][0];
-        audio.oncanplaythrough = null;
-      }, 500);
+      audio.currentTime = segments[to][0];
 
       segmentEnd = segments[to][1];
 
@@ -81,6 +78,8 @@ This module adds a audio narration to slides
     // initialize first segment end and play
     audio.addEventListener('canplay', function(){
         audio.currentTime = segments[currentIndex][0];
+        // remove event listener so it doesn't get executed again
+        this.removeEventListener('canplay',arguments.callee,false);
     });
     segmentEnd = segments[currentIndex][1];
   })
