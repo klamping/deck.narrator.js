@@ -1,3 +1,6 @@
 [submodule "lib/deck.js"]
 	path = lib/deck.js
 	url = https://github.com/imakewebthings/deck.js.git
+[submodule "lib/deck.automatic.js"]
+	path = lib/deck.automatic.js
+	url = https://github.com/rchampourlier/deck.automatic.js.git

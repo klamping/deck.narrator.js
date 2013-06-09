@@ -35,7 +35,7 @@ This module adds a audio narration to slides
 
   function checkTime () {
       if (audio.currentTime >= segmentEnd) {
-          audio.pause();
+        audio.pause();
       }
   }
 
@@ -57,12 +57,21 @@ This module adds a audio narration to slides
     $.deck('pause');
   }
 
+  function setInitialTime (ev) {
+        audio.currentTime = segments[currentIndex][0];
+
+        // remove event listener so this function doesn't get executed again
+        this.removeEventListener('canplay',setInitialTime,false);
+  }
+
   $d.bind('deck.init', function() {
     var opts = $.deck('getOptions');
     audio = $(opts.selectors.narratorAudio).get(0);
 
-    audio.addEventListener('timeupdate', checkTime, false);
+    // uncomment following line if not using deck.automatic.js
+    //audio.addEventListener('timeupdate', checkTime, false);
 
+    // Sync audio with slides
     audio.addEventListener('play', startSlides, false);
     audio.addEventListener('pause', stopSlides, false);
 
@@ -83,13 +92,8 @@ This module adds a audio narration to slides
       position += duration;
     });
 
-
-    // initialize first segment end and play
-    audio.addEventListener('canplay', function(){
-        audio.currentTime = segments[currentIndex][0];
-        // remove event listener so it doesn't get executed again
-        this.removeEventListener('canplay',arguments.callee,false);
-    });
+    // initialize first segment start and end
+    audio.addEventListener('canplay', setInitialTime);
     segmentEnd = segments[currentIndex][1];
   })
   /* Update audio location, play till end of slide */

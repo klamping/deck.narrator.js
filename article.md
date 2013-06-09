@@ -161,9 +161,6 @@ Now that we've got our segment timestamps defined, let's look at playing that au
         
         // define the end of our section
         segmentEnd = segments[to][1];
-
-        // play the audio
-        audio.play();
       }
     }
   
@@ -189,7 +186,7 @@ Now that we've got our audio hooked up to our slides, we can take advantage of t
 
 Aside from the going through the steps of adding the automatic extension, we also need to make sure that if a user starts/stops the audio, we start/stop the slideshow playback. To do this, we'll sync up [the 'play' and 'pause' events of our audio element](https://developer.mozilla.org/en-US/docs/Web/Guide/DOM/Events/Media_events) with the automatic extension. For simplicity, we're going to control all slide playback using our audio controls and leave off the deck.automatic.js playback control.
 
-Deck.automatic.js adds some events to the mix, including 'play' and 'pause' events. By triggering these events when our similarly named audio event fire, we can make sure our slides are in sync with our content. 
+Deck.automatic.js adds some events to the mix, including 'play' and 'pause' events. By triggering these events when our similarly named audio events fire, we can make sure our slides are in sync with our content. 
 
 We add two simple functions to our extension:
 
@@ -212,6 +209,8 @@ And then add our event listeners in the deck.init callback:
       audio.addEventListener('pause', stopSlides, false);
 
     });
+
+Also, since our slides automatically advance, we need to comment out the 'timeupdate' event listener which pauses our audio at the end of a slide.
 
 And that's it. Now our slides and audio automatically transition. 
 
