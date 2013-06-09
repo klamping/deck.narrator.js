@@ -214,6 +214,10 @@ Also, since our slides automatically advance, we need to comment out the 'timeup
 
 And that's it. Now our slides and audio automatically transition. 
 
+## Next Steps
+
+One thing the code doesn't take into consideration is if the user navigation the audio themselves. We could add this by listening to the 'seeked' event from the audio element and calculating where in the slide deck we should move to. For now, we're not going to worry about it. 
+
 ## Summing Up
 
 That's the majority of the code. I left out a few details in relation to some deck.js configurations, so again check out [the GitHub repo for the full example](https://github.com/klamping/deck.narrator.js).
