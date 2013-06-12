@@ -1,4 +1,4 @@
-# Add Narration to your Slide Deck with HTML5 Audio (Part 1)
+# Add Narration to your Slide Deck with HTML5 Audio
 
 **A good presenter will share their slide deck on the web after their presentation. But many times the slides are only a shell of the real talk. Fortunately, with HTML5 audio, we can add our voice back to our slides and recreate the real presentation.**
 
@@ -76,14 +76,6 @@ The other part of the equation is the ability to seek to different locations in 
     }, 1000);
   
 As you can see, getting and setting the current time is a trivial process. In the Part 2, we'll put this functionality to use by adding narration to slides.
-
-## Browser Support
-
-For the latest in browser support, check out [caniuse.com](http://caniuse.com/#feat=audio). Do note that just because a browser supports the HTML5 audio element, does not mean it supports a specific audio codec. 
-
------------------------------
-
-# Add Narration to your Slide Deck with HTML5 Audio (Part 2)
 
 ## Implementing Slide Narration
 
