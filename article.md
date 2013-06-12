@@ -26,9 +26,9 @@ If you'd like to read more on the subject, I highly recommend [Ashley Gullen's p
 
 ## How to Use It?
 
-Now that we've got our files created, let's put them to use. We can load our audio files by adding in two `<source>` tags with information about our two audio files inside of the `<audio>` tag:
+We can load our audio files by adding in two `<source>` tags with information about our two audio files inside of the `<audio>` tag:
 
-    <audio controls>
+    <audio controls id="myPlayer">
       <source src="myAudio.m4a" type="audio/mp4" />
       <source src="myAudio.ogg" type="audio/ogg"  />
       Your browser does not support HTML5 audio.
@@ -42,24 +42,13 @@ Again, the browser will choose whichever file it supports without you having to 
 
 Okay, so now if we load this into a webpage we'll get a simple audio player that we can manually control. What's nice is that since we used the 'controls' attribute, the audio player controls are built for us by the browser. This makes allowing manual control of our audio very simple.
 
-But for our needs, we want to control the playback of the audio programmatically.
+For our needs, we want to control the playback of the audio programmatically. To do this, let's take a look at the API for starting and stopping playback. The element has two built-in methods for this, 'play' and 'pause'. Calling those methods is straightforward:
 
-To do this, we'll start by adding an ID to our `<audio>` tag so that we can grab it from our JavaScript:
-
-    <audio controls id="myPlayer">...</audio>
-
-Next, we'll add a script tag to the page and create a local reference to the audio tag:
-
-    <script>
-      var audioPlayer = document.getElementById('myPlayer');
-    </script>
-
-Now that we've got a reference to our audio tag, let's take a look at the API for starting and stopping playback. The element has two built-in methods for this, 'play' and 'pause':
-
+    var audioPlayer = document.getElementById('myPlayer');
     audioPlayer.play();
     audioPlayer.pause();
 
-This will come in handy in a moment when we want to start playing our audio after we change slides.
+These methods will come in handy in a moment when we want to start playing our audio after we change slides.
 
 ## Seeking
 
